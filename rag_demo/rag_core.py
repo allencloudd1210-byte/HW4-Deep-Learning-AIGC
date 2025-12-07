@@ -13,6 +13,8 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain_ollama import ChatOllama
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 
@@ -67,13 +69,24 @@ class RAGSystem:
             shutil.rmtree(self.persist_directory)
         self.vector_store = None
 
-    def get_retrieval_chain(self, model_name: str = "llama3"):
+    def get_retrieval_chain(self, llm_api_key: Optional[str] = None, llm_provider: str = "ollama", model_name: str = "llama3"):
         if not self.vector_store:
             return None
             
         retriever = self.vector_store.as_retriever(search_kwargs={"k": 3})
         
-        llm = ChatOllama(model=model_name, temperature=0.7)
+        if llm_provider == "google":
+            if not llm_api_key:
+                raise ValueError("API Key required for Google")
+            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=llm_api_key, temperature=0.7)
+        elif llm_provider == "openai":
+            if not llm_api_key:
+                raise ValueError("API Key required for OpenAI")
+            llm = ChatOpenAI(model="gpt-3.5-turbo", api_key=llm_api_key, temperature=0.7)
+        elif llm_provider == "ollama":
+            llm = ChatOllama(model=model_name, temperature=0.7)
+        else:
+            raise ValueError("Unsupported LLM provider")
 
         memory = ConversationBufferMemory(
             memory_key="chat_history",

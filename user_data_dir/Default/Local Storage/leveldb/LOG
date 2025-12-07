@@ -1,0 +1,5 @@
+2025/12/07-21:46:50.254 d8b61 Creating DB /Users/bibi/Desktop/iot-hw4/user_data_dir/Default/Local Storage/leveldb since it was missing.
+2025/12/07-21:46:50.259 d8b61 Reusing MANIFEST /Users/bibi/Desktop/iot-hw4/user_data_dir/Default/Local Storage/leveldb/MANIFEST-000001
+2025/12/07-21:47:14.484 d8b64 Level-0 table #5: started
+2025/12/07-21:47:14.493 d8b64 Level-0 table #5: 229277 bytes OK
+2025/12/07-21:47:14.496 d8b64 Delete type=0 #3
