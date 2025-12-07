@@ -18,3 +18,12 @@ venv/
 
 # RAG Storage
 faiss_index/
+
+# User Data
+user_data_dir/
+
+# Temporary Scripts
+verify_*.py
+debug_*.py
+manual_run.log
+system.log
