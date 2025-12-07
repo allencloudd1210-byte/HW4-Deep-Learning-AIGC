@@ -1,0 +1,12 @@
+streamlit
+langchain==0.3.0
+langchain-community==0.3.0
+langchain-core==0.3.0
+langchain-ollama
+langchain-text-splitters==0.3.0
+faiss-cpu
+sentence-transformers
+pypdf
+python-docx
+unstructured
+huggingface_hub
